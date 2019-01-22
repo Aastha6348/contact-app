@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ContactDataService } from '../../services';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-get-contact',
@@ -10,24 +11,22 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 /**
  * This is the component which is entry component for the App.
- * This accounts for Add, delete and show Contact
+ * This accounts for Add, delete and show Contacts
  */
-export class GetContactComponent implements OnInit {
+export class GetContactComponent implements OnInit, AfterViewInit {
 
   title = 'contacts-app';
   componentproperty;
   formdata;
-  editmode: any;
+  dataAddress;
+  dataCompany;
+  updateindex: number;
   contactContent: any;
-  constructor(private contactDataService: ContactDataService) { }
+  constructor(private contactDataService: ContactDataService,
+  public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
     this.getContentJSON();
-    this.editmode = {
-      name: true,
-      company: true,
-      address: true,
-    },
     this.formdata = new FormGroup({
       name: new FormControl('', Validators.compose([
        Validators.required
@@ -69,4 +68,28 @@ export class GetContactComponent implements OnInit {
     'address': data.address, 'company': data.company });
     this.formdata.reset();
   }
+  onUpdateClick(num: number) {
+    this.updateindex = num;
+  }
+
+  ngAfterViewInit() {
+    this.onclickFunction();
+}
+
+onclickFunction() {
+  const obj: Object = {
+    name: this.contactContent[this.updateindex].name,
+    address: this.contactContent[this.updateindex].address,
+    company: this.contactContent[this.updateindex].company
+  };
+  this.ngxSmartModalService.setModalData(obj, 'myModal');
+}
+
+updateContact(company: string, address: string ): void {
+  console.log('inside');
+  console.log(company, address);
+  this.contactContent[this.updateindex].address = address;
+  this.contactContent[this.updateindex].company = company;
+  console.log(this.contactContent);
+ }
 }

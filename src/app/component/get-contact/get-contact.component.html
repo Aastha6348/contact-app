@@ -35,10 +35,24 @@
             <td>{{contact.address}}</td>
             <td>{{contact.company}}</td>
             <td>
-              <button (click)="onDeleteClick(i)" aria-label="Remove Contact">&times;</button>
+              <button (click)="onDeleteClick(i)" aria-label="Remove Contact">Remove</button>&nbsp;
+              <button (click)="ngxSmartModalService.getModal('myModal').open(); onUpdateClick(i)" aria-label="UPdate Contact">Update</button>
             </td>
           </tr>
         </table>
   </div>
 </div>
+
+<ngx-smart-modal #myModal identifier="myModal">
+        <pre> Update the Contact for {{ myModal.getData() | json | filterName }} </pre>
+        <div class="sub" style="float:center"> 
+            <input type="text" name="name" value = "{{ myModal.getData() | json | filterCompany }}" #company/>
+            <br/>
+            <input type="text" name="address" value = "{{ myModal.getData() | json | filterAddress }}"  #address/>
+            <br/>
+            <br/>
+            <button (click)="updateContact(company.value, address.value); myModal.close()">Update</button>
+        </div>
+      </ngx-smart-modal>
+
 </div>

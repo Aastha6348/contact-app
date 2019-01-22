@@ -31,9 +31,9 @@
           </tr>
           <tr *ngFor="let contact of contactContent; let i = index " style="text-align:center">
             <td>{{i + 1}}</td>
-            <td *ngIf="editmode.name == true">{{contact.name}}</td>
-            <td *ngIf="editmode.adderss == true">{{contact.address}}</td>
-            <td *ngIf="editmode.company == true">{{contact.company}}</td>
+            <td>{{contact.name}}</td>
+            <td>{{contact.address}}</td>
+            <td>{{contact.company}}</td>
             <td>
               <button (click)="onDeleteClick(i)" aria-label="Remove Contact">&times;</button>
             </td>

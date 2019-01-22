@@ -1,0 +1,27 @@
+[
+  {
+      "name":"Aastha",
+      "address": "Delhi Street",
+      "company": "Elucidata"
+  },
+  {
+      "name":"Pritesh",
+      "address": "Hyderabad Streeet",
+      "company": "DBS"
+  },
+  {
+      "name":"Jiaojiao",
+      "address": "Singapore Street",
+      "company": "DBS"
+  },
+  {
+      "name":"Kelvin",
+      "address": "California Street",
+      "company": "IBM"
+  },
+  {
+      "name":"Richard",
+      "address": "Boston Street",
+      "company": "Nagarro"
+  }
+]

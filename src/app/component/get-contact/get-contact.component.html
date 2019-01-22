@@ -1,0 +1,44 @@
+<div class="container">
+<div class = "row">
+  <div class = "column" style="float:left; width:30%">
+
+    <h1> Adding a Contact</h1>
+    <form [formGroup]="formdata" (ngSubmit) = "onAddClick(formdata.value)" style="border: 1px black;" >
+        <input type="text" class="fortextbox" name="name" placeholder="Name" 
+            formControlName="name">
+        <br/>
+        
+        <input type="text" class="fortextbox" name="address" 
+            placeholder="Address" formControlName="address">
+        <br/>
+    
+        <input type="text" class="fortextbox" name="company" 
+            placeholder="Company" formControlName="company">
+    
+          <br/>
+        
+        <input type="submit" class="forsubmit" value="Add Contact">
+      </form>
+  </div>
+  <div class="column" style="float:right; width:70%">
+      <table class="table" align="center">
+          <tr style="text-align:center">
+            <th sortName [sortKey]="'name'" [data]="contactContent">#</th>
+            <th sortName [sortKey]="'name'" [data]="contactContent">Name</th>
+            <th sortName [sortKey]="'address'" [data]="contactContent">Address</th> 
+            <th sortName [sortKey]="'company'" [data]="contactContent">Company</th>
+            <th sortName [sortKey]="'name'" [data]="contactContent"> Action</th>
+          </tr>
+          <tr *ngFor="let contact of contactContent; let i = index " style="text-align:center">
+            <td>{{i + 1}}</td>
+            <td *ngIf="editmode.name == true">{{contact.name}}</td>
+            <td *ngIf="editmode.adderss == true">{{contact.address}}</td>
+            <td *ngIf="editmode.company == true">{{contact.company}}</td>
+            <td>
+              <button (click)="onDeleteClick(i)" aria-label="Remove Contact">&times;</button>
+            </td>
+          </tr>
+        </table>
+  </div>
+</div>
+</div>
